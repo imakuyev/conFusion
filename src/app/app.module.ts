@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
+
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -57,7 +59,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AppRoutingModule
 
   ],
-  providers: [DishService],
+  providers: [DishService,PromotionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
