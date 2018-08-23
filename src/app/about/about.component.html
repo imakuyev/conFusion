@@ -61,7 +61,7 @@
 
 
 
-     
+     <!--
         <mat-grid-list cols="1" rowHeight="200px">
 
           <mat-grid-tile *ngFor="let leader of leaders" >  
@@ -77,7 +77,22 @@
             
           </mat-grid-tile>
         </mat-grid-list>
-       
+    -->
+        
+        <mat-list>
+            <div fxLayout="row" *ngFor="let leader of leaders">
+              <div fxFlex="8%">
+                <img height="75px" src={{leader.image}} alt={{leader.name}}>
+              </div>
+              <div>
+                <h5>
+                  <p>{{leader.name}}</p>
+                  <p>{{leader.designation}}</p>
+                  <p>{{leader.description}}</p>
+                </h5>
+              </div>
+            </div>
+          </mat-list>    
   </div>
 
  
