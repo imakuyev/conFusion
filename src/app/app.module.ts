@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 import { DishService } from './services/dish.service';
+import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 
 
