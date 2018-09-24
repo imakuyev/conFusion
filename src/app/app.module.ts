@@ -45,7 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { SliderComponent } from './slider/slider.component';
+import { MatSliderModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent//,
+    LoginComponent,
+    SliderComponent//,
     //FormsModule
   ],
   imports: [
@@ -78,7 +80,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
     MatSelectModule,
     MatSlideToggleModule,
-
+    MatSliderModule,
+   
     AppRoutingModule,
     
     FormsModule ,
@@ -90,6 +93,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginComponent
 ],
   providers: [DishService,PromotionService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,SliderComponent]
 })
 export class AppModule { }
