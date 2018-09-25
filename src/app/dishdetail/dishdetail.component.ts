@@ -41,7 +41,7 @@ export class DishdetailComponent implements OnInit {
 
   currentdish: Dish;
 
-  rating:any;
+  //rating:any;
 
 
 
@@ -171,7 +171,7 @@ setPrevNext(dishId: number) {
        
    
       this.dish.comments.push(this.comment);
- 
+      this.commentFormDirective.resetForm();
       this.commentForm.reset({
         rating: 5,
         comment: '',
@@ -179,7 +179,8 @@ setPrevNext(dishId: number) {
         date: ''
 
       });
-      this.commentFormDirective.resetForm();
+      this.comment.rating=5;
+     
 
        
 
