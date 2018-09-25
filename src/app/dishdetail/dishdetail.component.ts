@@ -89,7 +89,7 @@ setPrevNext(dishId: number) {
     this.commentForm = this.fb.group({
       author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       comment: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)] ] ,
-      rating: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(5)]]  
+      rating: ['5', [Validators.required]]  
        
           });
       this.commentForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -104,7 +104,7 @@ setPrevNext(dishId: number) {
 
 
   formErrors = {
-    'rating': '',
+    'rating': '5',
     'comment': '',
     'author': '' 
   };
@@ -157,7 +157,7 @@ setPrevNext(dishId: number) {
   }
   onSubmit() {
 
-    alert('test')
+   
     var date = new Date();
     
     console.log(   date);
@@ -173,7 +173,7 @@ setPrevNext(dishId: number) {
       this.dish.comments.push(this.comment);
  
       this.commentForm.reset({
-        rating: 0,
+        rating: 5,
         comment: '',
         author: '',
         date: ''
