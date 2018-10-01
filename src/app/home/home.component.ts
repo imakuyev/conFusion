@@ -13,10 +13,12 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  dish: Dish;
-  promotion: Promotion;
-  leader: Leader;
-
+  dish:                 Dish;
+  promotion:            Promotion;
+  leader:               Leader;
+  dishErrMess:          string;
+  promotionErrMess:     string;
+  leaderErrMess:        string;
   constructor(  private dishservice: DishService,
                 private promotionservice: PromotionService,
                 private leaderservice: LeaderService,
@@ -29,13 +31,18 @@ export class HomeComponent implements OnInit {
      // this.leader = this.leaderservice.getFeaturedLeader();
 
       //this.dishservice.getFeaturedDish() .then(dish =>  this.dish= dish);
-      this.dishservice.getFeaturedDish() .subscribe(dish =>  this.dish= dish);
-      
-      //this.promotionservice.getFeaturedPromotion().then(promotion => this.promotion = promotion);
-      this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion);
+      //this.dishservice.getFeaturedDish().subscribe(dish =>  this.dish= dish, errmess => this.dishErrMess = <any>errmess);
+      this.dishservice.getFeaturedDish().subscribe(dish => this.dish = dish, 
+                    errmess => this.dishErrMess = <any>errmess.message);
 
+      //this.promotionservice.getFeaturedPromotion().then(promotion => this.promotion = promotion);
+      //this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion,   errmess => this.promotionErrMess = <any>errmess );
+      this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion,  errmess => this.promotionErrMess = <any>errmess.message);
+   
       //this.leaderservice.getFeaturedLeader().then(leader => this.leader = leader);
-      this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader);
+      //this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader,    rmess => this.promotionErrMess = <any>errmess);
+      this.leaderservice.getFeaturedLeader() .subscribe(leader => this.leader = leader, errmess => this.leaderErrMess = <any>errmess.message);
+      
   }
 
 }

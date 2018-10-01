@@ -51,6 +51,9 @@ import { baseURL } from './shared/baseurl';
 import { HttpClientModule } from '@angular/common/http';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +95,8 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
     FormsModule ,
     ReactiveFormsModule,
     MatProgressSpinnerModule,    
-    HttpClientModule
+    HttpClientModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
 
   entryComponents: [

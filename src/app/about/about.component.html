@@ -82,7 +82,7 @@
         <mat-list>
             <div fxLayout="row" *ngFor="let leader of leaders">
               <div fxFlex="8%">
-                <img height="75px" src={{leader.image}} alt={{leader.name}}>
+                <img height="75px" src="{{BaseURL +leader.image}}" alt={{leader.name}}>
               </div>
               <div>
                 <h5>

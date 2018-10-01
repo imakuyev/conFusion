@@ -34,6 +34,9 @@ export class DishdetailComponent implements OnInit {
   @ViewChild('fform') commentFormDirective;
 
   dish: Dish;
+
+  dishcopy = null;
+
   dishIds: number[];
   prev: number;
   next: number;
@@ -47,11 +50,12 @@ export class DishdetailComponent implements OnInit {
 
   commentForm: FormGroup;
   comment:     Comment;
+  errMess:    string;
   //contactType = ContactType;
 
 
 
-  constructor(private dishservice: DishService,
+  constructor(private dishService: DishService,
               private route: ActivatedRoute,
               private location: Location,
               private fb: FormBuilder,
@@ -69,9 +73,20 @@ export class DishdetailComponent implements OnInit {
   }
 */
 ngOnInit() {
-  this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
-  this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(+params['id'])))
-  .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+  //this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds  );
+    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
+                                            errmess => this.errMess = <any>errmess);
+  //this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(+params['id'])))
+  //                      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+  //                      errmess => { this.dish = null; this.errMess = <any>errmess; });
+
+   this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(+params['id'])))
+                        .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+                        errmess => { this.dish = null; this.errMess = <any>errmess; });                      
+
+
+
+
 }
 
 setPrevNext(dishId: number) {
@@ -97,9 +112,6 @@ setPrevNext(dishId: number) {
 
       this.onValueChanged(); // (re)set validation messages now
 
-
-
-
   }
 
 
@@ -122,9 +134,7 @@ setPrevNext(dishId: number) {
     },
     'rating': {
       'required':      'Rating number is required.'
-  
     },
-   
   };
 
 
@@ -141,37 +151,25 @@ setPrevNext(dishId: number) {
             if (control.errors.hasOwnProperty(key)) {
               this.formErrors[field] += messages[key] + ' ';
             }
-          }
-        
+          }        
         }
-
-
-
       }
-
     }
-
-
-
-
-
   }
-  onSubmit() {
-
-   
-    var date = new Date();
-    
-    console.log(   date);
-    
+  onSubmit() {   
+    var date = new Date();    
+    console.log(   date);  
 
       this.comment = this.commentForm.value;
-
       this.comment.date=date.toString();
-
       //this.dish.comments.push()
-       
-   
-      this.dish.comments.push(this.comment);
+      //this.dish.comments.push(this.comment);
+      this.dishcopy.comments.push(this.comment);
+      this.dishcopy.save()
+        .subscribe(dish => { this.dish = dish; console.log(this.dish); });
+
+
+
       this.commentFormDirective.resetForm();
       this.commentForm.reset({
         rating: 5,
@@ -181,10 +179,6 @@ setPrevNext(dishId: number) {
 
       });
       this.comment.rating=5;
-     
-
-       
-
   }
 
 }
