@@ -79,7 +79,7 @@
         </mat-grid-list>
     -->
         
-        <mat-list>
+        <mat-list  *ngIf="leaders" [@expend]      >
             <div fxLayout="row" *ngFor="let leader of leaders">
               <div fxFlex="8%">
                 <img height="75px" src="{{BaseURL +leader.image}}" alt={{leader.name}}>
@@ -94,9 +94,13 @@
             </div>
           </mat-list>    
   </div>
-  <div [hidden]="leaders">
+  <div [hidden]="leaders || errMess">
       <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
-    </div>
+  </div>
+  <div *ngIf="errMess">
+      <h2>Error</h2>
+      <h4>{{errMess}}</h4>
+  </div>
 
  
 

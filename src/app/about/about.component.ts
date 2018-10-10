@@ -5,13 +5,17 @@ import { Location } from '@angular/common';
 import { Leader } from '../shared/leader';
 import { LEADERS } from '../shared/leaders';
 import { LeaderService } from '../services/leader.service';
-
+import { flyInOut, expand } from '../animations/app.animation';
 
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+  styleUrls: ['./about.component.scss'],
+  animations: [
+    flyInOut(),
+    expand()
+  ]
 })
 export class AboutComponent implements OnInit {
 
